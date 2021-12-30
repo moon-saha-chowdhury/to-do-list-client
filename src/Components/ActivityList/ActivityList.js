@@ -66,10 +66,12 @@ const ActivityList = ({reRender, setReRender}) => {
                              className='text-center fw-bold'>{activity.description}</td>
                                 <td>
                               <select onChange={(event) =>changeStatus(event, activity._id)} className="form-control input-lg bg-transparent border-0 without-focus text-info fw-bold text-center p-0" aria-label=".form-select-lg example">
-                              <option value={activity.status}>{activity.status}</option>
-                              {
-                               activity.status ==="Pending" && <option value="Done">Done</option>||<option value="Pending">Pending</option>
-                              }
+                              <option value="0">{activity.status}</option>
+                              <option value="1">{
+                                  
+                                  activity.status ==="Pending" && 'Done' || 'Pending'
+                                  }</option>
+                           
                         </select>
                       </td>
                                 <td>
