@@ -30,8 +30,8 @@ const ActivityList = () => {
         })
 	};
      
-    const handleChnageTextColor = (disable, id) => {
-        disable = true;
+    const handleChangeTextColor = (id) => {
+        const disable = true;
         const url =`https://fathomless-refuge-89561.herokuapp.com/addStatus/${id}`;
         fetch(url,{
             method:'PATCH',
@@ -54,7 +54,7 @@ const ActivityList = () => {
           <table className='table table-bordered table-striped'>
           <thead>
               <tr className="heading bg-success text-white">
-                <th>Activity List</th>
+                <th>Activity Name</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -68,13 +68,17 @@ const ActivityList = () => {
                              className='text-center fw-bold'>{activity.description}</td>
                                 <td>
                               <select onChange={(event) =>changeStatus(event, activity._id)} className="form-control input-lg bg-transparent border-0 without-focus text-info fw-bold text-center p-0" aria-label=".form-select-lg example">
-                              <option value="0">{activity.status}</option>
-                              <option value="1">Pending</option>
-                              <option value="2">Done</option>
+                              <option value={activity.status}>{activity.status}</option>
+                              {
+                               activity.status ==="Pending" && <option value="Done">Done</option>||<option value="Pending">Pending</option>
+                              }
                         </select>
                       </td>
                                 <td>
-                                    <button onClick={()=>handleChnageTextColor(activity.disable,activity._id)} className="btn btn-danger text-light">Cancel</button>
+                                {
+                                        activity.disable?<button disabled onClick={()=>handleChangeTextColor(activity._id)} className="btn btn-danger text-light">Delete</button>:
+                                        <button onClick={()=>handleChangeTextColor(activity._id)} className="btn btn-danger text-light">Delete</button>
+                                    }
                                 </td>
                             </tr>
 

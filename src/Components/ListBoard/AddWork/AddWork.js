@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 
 const AddWork = () => {
     const { register, handleSubmit } = useForm();
-    const onSubmit = data =>{
+    const onSubmit = (data,e)=>{
       const reviewData ={
           description:data.description,
-          status:"pending",
+          status:"Pending",
           disable:false
       }
       console.log(reviewData);
@@ -23,6 +23,7 @@ const AddWork = () => {
               alert("Your activity added successfully")
           }
       })
+      e.target.reset();
   };
     return (
       <section>
