@@ -1,7 +1,9 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import { useState } from 'react/cjs/react.development';
 
-const AddWork = () => {
+const AddWork = ({reRender, setReRender}) => {
+
     const { register, handleSubmit } = useForm();
     const onSubmit = (data,e)=>{
       const reviewData ={
@@ -19,9 +21,8 @@ const AddWork = () => {
       })
       .then(res=>res.json())
       .then(data =>{
-          if(data){
-              alert("Your activity added successfully")
-          }
+          console.log(data);
+            setReRender(!reRender);
       })
       e.target.reset();
   };

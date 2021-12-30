@@ -1,14 +1,14 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 
-const ActivityList = () => {
+const ActivityList = ({reRender, setReRender}) => {
     const [activities, setActivities] = useState([]);
     
     useEffect(()=>{
         fetch('https://fathomless-refuge-89561.herokuapp.com/activity')
         .then(res=> res.json())
         .then(data=> setActivities(data))
-    },[])
+    },[reRender])
 
     
 	const changeStatus = (event, id) => {
@@ -24,9 +24,7 @@ const ActivityList = () => {
         .then(res=>res.json())
         .then(data =>{
             console.log(data);
-            if(data){
-                alert("Status updated")
-            }
+            setReRender(!reRender)
         })
 	};
      
@@ -40,7 +38,7 @@ const ActivityList = () => {
         })
         .then(res=>res.json())
         .then(data =>{
-            console.log(data);
+            setReRender(!reRender)
         })
 
     }
