@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import "./ActivityList.css";
 
 const ActivityList = ({reRender, setReRender}) => {
     const [activities, setActivities] = useState([]);
@@ -24,7 +25,9 @@ const ActivityList = ({reRender, setReRender}) => {
         .then(res=>res.json())
         .then(data =>{
             console.log(data);
-            setReRender(!reRender)
+            if(data){
+                setReRender(!reRender);
+            }
         })
 	};
      
@@ -65,14 +68,11 @@ const ActivityList = ({reRender, setReRender}) => {
                             <td style={{textDecoration : activity.disable? "line-through" : "none"}}
                              className='text-center fw-bold'>{activity.description}</td>
                                 <td>
-                              <select onChange={(event) =>changeStatus(event, activity._id)} className="form-control input-lg bg-transparent border-0 without-focus text-info fw-bold text-center p-0" aria-label=".form-select-lg example">
-                              <option value="0">{activity.status}</option>
-                              <option value="1">{
-                                  
-                                  activity.status ==="Pending" && 'Done' || 'Pending'
-                                  }</option>
-                           
-                        </select>
+                                {
+                            activity.status==="Pending" &&  <select onChange={(event) =>changeStatus(event, activity._id)} className="form-control input-lg bg-transparent border-0 without-focus text-info fw-bold text-center p-0" aria-label=".form-select-lg example">
+                            <option  defaultValue={activity.status}>{activity.status}</option>
+                                <option value="Done">Done</option></select> || <p className='text-info fw-bold'>Done</p>    
+                        }
                       </td>
                                 <td>
                                 {
