@@ -67,13 +67,17 @@ const ActivityList = ({reRender, setReRender}) => {
                             <tr>
                             <td style={{textDecoration : activity.disable? "line-through" : "none"}}
                              className='text-center fw-bold'>{activity.description}</td>
-                                <td>
-                                {
-                            activity.status==="Pending" &&  <select onChange={(event) =>changeStatus(event, activity._id)} className="form-control input-lg bg-transparent border-0 without-focus text-info fw-bold text-center p-0" aria-label=".form-select-lg example">
-                            <option  defaultValue={activity.status}>{activity.status}</option>
-                                <option value="Done">Done</option></select> || <p className='text-info fw-bold'>Done</p>    
-                        }
-                      </td>
+
+                             {
+                                 activity.disable?<td className='text-info fw-bold'>Done</td>:<td>
+                                 {
+                             activity.status==="Pending" &&  <select onChange={(event) =>changeStatus(event, activity._id)} className="form-control input-lg bg-transparent border-0 without-focus text-info fw-bold text-center p-0" aria-label=".form-select-lg example">
+                             <option  defaultValue={activity.status}>{activity.status}</option>
+                                 <option value="Done">Done</option></select> || <p className='text-info fw-bold'>Done</p>    
+                         }
+                       </td>
+                             }
+                            
                                 <td>
                                 {
                                         activity.disable?<button disabled onClick={()=>handleChangeTextColor(activity._id)} className="btn btn-danger text-light">Delete</button>:
